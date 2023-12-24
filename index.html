@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="icon" type="image/png" href="media/icons/calculator.svg">
+    <title>Митний калькулятор</title>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Митний калькулятор</h2>
+
+    <ul class="nav nav-tabs" id="vehicleTabs">
+
+        <li class="nav-item">
+            <a class="nav-link active" id="carTab" data-toggle="tab" href="#car" onclick="changeTab('car')">
+                <i class="bi bi-car-front"></i> Легкові
+            </a>
+        </li>
+
+    </ul>
+
+    <div class="tab-content mt-3">
+
+        <div class="tab-pane fade show active" id="car">
+            <form id="customsCalculatorFormCar">
+                <form id="carForm">
+
+                    <div class="form-group">
+                        <label for="engineType"><strong>Тип двигуна:</strong></label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="engineType" id="engineTypeGas" value="1" checked>
+                            <label class="form-check-label" for="engineTypeGas">- бензиновий</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="engineType" id="engineTypeDiesel" value="2">
+                            <label class="form-check-label" for="engineTypeDiesel">- дизельний</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="engineVolume"><strong>Об'єм двигуна (куб.см.):</strong></label>
+                        <input type="number" class="form-control" id="engineVolume" name="engineVolume" placeholder="1598" min="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productionYear"><strong>Рік випуску:</strong></label>
+                        <select class="form-control" id="manufacturingYear" name="manufacturingYear">
+                            <script>
+                                var select = document.getElementById("manufacturingYear");
+                                var currentYear = new Date().getFullYear();
+
+                                for (var year = 2023; year >= 2008; year--) {
+                                    var option = document.createElement("option");
+                                    option.value = year;
+                                    option.text = year;
+                                    select.add(option);
+                                }
+                            </script>
+                            <option value="older">Старше</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="carCost"><strong>Вартість авто:</strong></label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="carCost" name="carCost" min="1">
+                            <div class="input-group-append">
+                                <select class="custom-select" id="currency">
+                                    <option value="EUR">EUR</option>
+                                    <option value="USD">USD</option>
+                                    <option value="PLN">PLN</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="calculateFeeCar('resultCarTableContainer');">Розрахувати</button>
+
+                    <div class="row mt-4" id="resultCarTableContainer" style="display: none;">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Вид платежу</th>
+                                    <th scope="col">Основні нарахування</th>
+                                    <th scope="col">Ставка</th>
+                                    <th scope="col">Сума</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">Мито</th>
+                                    <td id="costum-duty-cost">0 грн.</td>
+                                    <td>10%</td>
+                                    <td id="custom-duty-sum">0 грн.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Акциз</th>
+                                    <td id="engine-volume-cost">0 куб.см.</td>
+                                    <td>1х50</td>
+                                    <td id="engine-volume-sum">0 грн.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">ПДВ</th>
+                                    <td id="excise-cost">0 грн.</td>
+                                    <td>20%</td>
+                                    <td id="excise-sum">0 грн.</td>
+                                </tr>
+                                <tr class="last">
+                                    <th scope="row">ВСЬОГО</th>
+                                    <td colspan="2"></td>
+                                    <td id="total-sum">0 грн.</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </form>
+            </form>
+        </div>
+
+        <div class="tab-pane fade" id="usa">
+            <form id="customsCalculatorFormUSA">
+                2
+            </form>
+        </div>
+
+        <!-- Add other tab content with unique IDs -->
+
+    </div>
+
+</div>
+
+<script src="media/js/app.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
